@@ -50,24 +50,19 @@ public class Game extends Canvas implements Runnable {
     public int toadetteTimes = 0;
     public int sansTimes = 0;
     public int shyGuyTimes = 0;
+    public int kirbyTimes = 0;
+    public int shroobTimes = 0;
 
     public long playTime = 0;
+
+    public boolean sChar1 = false;
+    public boolean sChar2 = false;
 
     public SCENE getID() {
         return scene;
     }
 
     public Game() throws IOException, LineUnavailableException, UnsupportedAudioFileException, FontFormatException {
-        try {
-            loadStats();
-        } catch (FileNotFoundException e) {
-            Path path = Path.of(System.getProperty("user.home"));
-            File file = new File(path + "/Super Roshambo");
-            file.mkdirs();
-            file = new File(path + "/Super Roshambo/stats.ini");
-            file.createNewFile();
-        }
-
         handler = new Handler(this);
         random = new Random();
 
@@ -77,6 +72,17 @@ public class Game extends Canvas implements Runnable {
         t.setX(-60);
         handler.addObject(t);
         soundtrack.play("title");
+
+        try {
+            loadStats();
+        } catch (FileNotFoundException e) {
+            Path path = Path.of(System.getProperty("user.home"));
+            File file = new File(path + "/Super Roshambo");
+            file.mkdirs();
+            file = new File(path + "/Super Roshambo/stats.ini");
+            file.createNewFile();
+            writeStats();
+        }
     }
 
     public synchronized void start() {
@@ -207,8 +213,13 @@ public class Game extends Canvas implements Runnable {
         toadetteTimes = Integer.parseInt(br.readLine());
         sansTimes = Integer.parseInt(br.readLine());
         shyGuyTimes = Integer.parseInt(br.readLine());
+        kirbyTimes = Integer.parseInt(br.readLine());
+        shroobTimes = Integer.parseInt(br.readLine());
 
         playTime = Integer.parseInt(br.readLine());
+
+        sChar1 = Boolean.parseBoolean(br.readLine());
+        sChar2 = Boolean.parseBoolean(br.readLine());
 
         br.close();
     }
@@ -233,8 +244,13 @@ public class Game extends Canvas implements Runnable {
         writer.write(toadetteTimes + "\n");
         writer.write(sansTimes + "\n");
         writer.write(shyGuyTimes + "\n");
+        writer.write(kirbyTimes + "\n");
+        writer.write(shroobTimes + "\n");
 
         writer.write(playTime + "\n");
+
+        writer.write(sChar1 + "\n");
+        writer.write(sChar2 + "");
 
         writer.close();
     }

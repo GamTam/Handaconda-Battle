@@ -30,7 +30,6 @@ public class StatsText extends GameObject {
         game.handler.addObject(this);
     }
 
-    @Override
     public void tick() {
         long playSeconds = game.playTime / 60;
         long playMinutes = playSeconds / 60;
@@ -70,10 +69,9 @@ public class StatsText extends GameObject {
             sh = Long.toString(playHours);
         }
 
-        displayTime = String.format("%s:%s:%s",sh,sm,ss);
+        displayTime = String.format("%s:%s:%s", sh, sm, ss);
     }
 
-    @Override
     public void render(Graphics g) {
         int tempX = x;
         int tempY = y;
@@ -100,7 +98,7 @@ public class StatsText extends GameObject {
         g.drawString("Hard Games: " + game.hardTimes, x, y);
 
         x = game.getWidth() / 2;
-        y = game.getHeight() / 2;
+        y = (game.getHeight() / 2) + increaseAmount / 4;
 
         g.drawString("Mario Games: " + game.marioTimes, x, y);
         y += increaseAmount;
@@ -110,9 +108,19 @@ public class StatsText extends GameObject {
         y += increaseAmount;
         g.drawString("Toadette Games: " + game.toadetteTimes, x, y);
         y += increaseAmount;
-        g.drawString("Sans Games: " + game.sansTimes, x, y);
+        g.drawString("Shroob Games: " + game.shroobTimes, x, y);
         y += increaseAmount;
         g.drawString("Shy Guy Games: " + game.shyGuyTimes, x, y);
+
+        if (game.sChar1) {
+            y += increaseAmount;
+            g.drawString("Kirby Games: " + game.kirbyTimes, x, y);
+        }
+
+        if (game.sChar2) {
+            y += increaseAmount;
+            g.drawString("Sans Games: " + game.sansTimes, x, y);
+        }
 
         x = tempX;
         y = tempY;

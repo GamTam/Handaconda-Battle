@@ -13,6 +13,8 @@ public class CharSelect extends Scene {
     Button fawful;
     Button toadette;
     Button sans;
+    Button shroob;
+    Button kirby;
     Button shyGuy;
 
     Button back;
@@ -38,15 +40,18 @@ public class CharSelect extends Scene {
         // Loads all of the objects into the scene
         new BG(this.game, "charselect bg", true, true);
 
-        random =   new Button(400, 196, 0, ID.BUTTON, this.game, "charselect/Random", true);
+        random =   new Button(400, 198, 0, ID.BUTTON, this.game, "charselect/Random", true);
 
-        mario =    new Button(185, 91, 0, ID.BUTTON, this.game, "charselect/Mario", true);
-        luigi =    new Button(400, 91, 0, ID.BUTTON, this.game, "charselect/Luigi", true);
-        fawful =   new Button(615, 91, 0, ID.BUTTON, this.game, "charselect/Fawful", true);
+        mario =    new Button(185, 67, 0, ID.BUTTON, this.game, "charselect/Mario", true);
+        luigi =    new Button(400, 67, 0, ID.BUTTON, this.game, "charselect/Luigi", true);
+        fawful =   new Button(615, 67, 0, ID.BUTTON, this.game, "charselect/Fawful", true);
 
-        toadette = new Button(185, 301, 0, ID.BUTTON, this.game, "charselect/Toadette", true);
-        sans =     new Button(400, 301, 0, ID.BUTTON, this.game, "charselect/Sans", true);
-        shyGuy =   new Button(615, 301, 0, ID.BUTTON, this.game, "charselect/Shy Guy", true);
+        toadette = new Button(185, 330, 0, ID.BUTTON, this.game, "charselect/Toadette", true);
+        shroob =   new Button(400, 330, 0, ID.BUTTON, this.game, "charselect/Shroob", true);
+        shyGuy =   new Button(615, 330, 0, ID.BUTTON, this.game, "charselect/Shy Guy", true);
+
+        sans =     new Button(185, 198, 0, ID.BUTTON, this.game, "charselect/Sans", true);
+        kirby =    new Button(615, 198, 0, ID.BUTTON, this.game, "charselect/Kirby", true);
 
         back =     new Button(127, 565, 0, ID.BUTTON, this.game, "charselect/Back", true);
 
@@ -91,7 +96,9 @@ public class CharSelect extends Scene {
                 playerChar = sans;
             } else if (shyGuy.mouseOver(x, y)) {
                 playerChar = shyGuy;
-            } else if (random.mouseOver(x, y)) {
+            } else if (kirby.mouseOver(x, y)) {
+                playerChar = kirby;
+            }else if (random.mouseOver(x, y)) {
                 playerChar = random;
             } else if (easy.mouseOver(x, y)) {
                 difficulty = easy;
@@ -141,6 +148,8 @@ public class CharSelect extends Scene {
                         game.sansTimes += 1;
                     } else if (playerChar.name.equalsIgnoreCase("toadette")) {
                         game.toadetteTimes += 1;
+                    } else if (playerChar.name.equalsIgnoreCase("kirby")) {
+                        game.kirbyTimes += 1;
                     }
 
                     if (difficulty.name.equalsIgnoreCase("easy")) {

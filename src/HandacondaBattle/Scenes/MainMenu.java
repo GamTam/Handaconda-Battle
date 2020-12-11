@@ -14,6 +14,8 @@ public class MainMenu extends Scene {
     TitleScreenChars fawful;
     TitleScreenChars sans;
     TitleScreenChars toadette;
+    TitleScreenChars shroob;
+    TitleScreenChars kirby;
 
     Button titleScreen;
     Button playButton;
@@ -29,12 +31,39 @@ public class MainMenu extends Scene {
 
         new BG(this.game, "Title Screen bg", false, false);
 
-        luigi = new TitleScreenChars(((game.getWidth() + 100) / 5), game.getHeight() / 2, 2, ID.SLIDE, game,"luigi/title screen", 60, 150, true);
-        mario = new TitleScreenChars(((game.getWidth() + 100) / 5) * 2, game.getHeight() / 2, 2, ID.SLIDE, game,"mario/title screen", 60, 150, true);
-        shyGuy = new TitleScreenChars(((game.getWidth() + 100) / 5) * 3, game.getHeight() / 2, 2, ID.SLIDE, game,"shy guy/title screen", 60, 150, true);
-        fawful = new TitleScreenChars((((game.getWidth() + 100) / 5) * 4), game.getHeight() / 2, 2, ID.SLIDE, game,"fawful/title screen", 60, 150, true);
-        sans = new TitleScreenChars(0, game.getHeight() / 2, 2, ID.SLIDE, game,"sans/title screen", 60, 150, true);
-        toadette = new TitleScreenChars((((game.getWidth() + 100) / 5) * 5), game.getHeight() / 2, 2, ID.SLIDE, game,"toadette/title screen", 60, 150, true);
+        if (game.sChar1 && game.sChar2) {
+            luigi = new TitleScreenChars(((game.getWidth() + 150) / 7), game.getHeight() / 2, 2, ID.SLIDE, game, "luigi/title screen", 60, 150, true);
+            mario = new TitleScreenChars(((game.getWidth() + 150) / 7) * 2, game.getHeight() / 2, 2, ID.SLIDE, game, "mario/title screen", 60, 150, true);
+            shyGuy = new TitleScreenChars(((game.getWidth() + 150) / 7) * 3, game.getHeight() / 2, 2, ID.SLIDE, game, "shy guy/title screen", 60, 150, true);
+            fawful = new TitleScreenChars((((game.getWidth() + 150) / 7) * 4), game.getHeight() / 2, 2, ID.SLIDE, game, "fawful/title screen", 60, 150, true);
+            shroob = new TitleScreenChars(0, game.getHeight() / 2, 2, ID.SLIDE, game, "shroob/title screen", 60, 150, true);
+            toadette = new TitleScreenChars((((game.getWidth() + 150) / 7) * 5), game.getHeight() / 2, 2, ID.SLIDE, game, "toadette/title screen", 60, 150, true);
+            kirby = new TitleScreenChars((((game.getWidth() + 150) / 7) * 6), game.getHeight() / 2, 2, ID.SLIDE, game, "kirby/title screen", 70, 150, true);
+            sans = new TitleScreenChars((((game.getWidth() + 150) / 7) * 7), game.getHeight() / 2, 2, ID.SLIDE, game, "sans/title screen", 60, 150, true);
+        } else if (game.sChar1) {
+            luigi = new TitleScreenChars(((game.getWidth() + 150) / 6), game.getHeight() / 2, 2, ID.SLIDE, game, "luigi/title screen", 60, 150, true);
+            mario = new TitleScreenChars(((game.getWidth() + 150) / 6) * 2, game.getHeight() / 2, 2, ID.SLIDE, game, "mario/title screen", 60, 150, true);
+            shyGuy = new TitleScreenChars(((game.getWidth() + 150) / 6) * 3, game.getHeight() / 2, 2, ID.SLIDE, game, "shy guy/title screen", 60, 150, true);
+            fawful = new TitleScreenChars((((game.getWidth() + 150) / 6) * 4), game.getHeight() / 2, 2, ID.SLIDE, game, "fawful/title screen", 60, 150, true);
+            shroob = new TitleScreenChars(0, game.getHeight() / 2, 2, ID.SLIDE, game, "shroob/title screen", 60, 150, true);
+            toadette = new TitleScreenChars((((game.getWidth() + 150) / 6) * 5), game.getHeight() / 2, 2, ID.SLIDE, game, "toadette/title screen", 60, 150, true);
+            kirby = new TitleScreenChars((((game.getWidth() + 150) / 6) * 6), game.getHeight() / 2, 2, ID.SLIDE, game, "kirby/title screen", 70, 150, true);
+        } else if (game.sChar2) {
+            luigi = new TitleScreenChars(((game.getWidth() + 150) / 6), game.getHeight() / 2, 2, ID.SLIDE, game, "luigi/title screen", 60, 150, true);
+            mario = new TitleScreenChars(((game.getWidth() + 150) / 6) * 2, game.getHeight() / 2, 2, ID.SLIDE, game, "mario/title screen", 60, 150, true);
+            shyGuy = new TitleScreenChars(((game.getWidth() + 150) / 6) * 3, game.getHeight() / 2, 2, ID.SLIDE, game, "shy guy/title screen", 60, 150, true);
+            fawful = new TitleScreenChars((((game.getWidth() + 150) / 6) * 4), game.getHeight() / 2, 2, ID.SLIDE, game, "fawful/title screen", 60, 150, true);
+            shroob = new TitleScreenChars(0, game.getHeight() / 2, 2, ID.SLIDE, game, "shroob/title screen", 60, 150, true);
+            toadette = new TitleScreenChars((((game.getWidth() + 150) / 6) * 5), game.getHeight() / 2, 2, ID.SLIDE, game, "toadette/title screen", 60, 150, true);
+            sans = new TitleScreenChars((((game.getWidth() + 150) / 6) * 6), game.getHeight() / 2, 2, ID.SLIDE, game, "sans/title screen", 60, 150, true);
+        } else {
+            luigi = new TitleScreenChars(((game.getWidth() + 150) / 5), game.getHeight() / 2, 2, ID.SLIDE, game, "luigi/title screen", 60, 150, true);
+            mario = new TitleScreenChars(((game.getWidth() + 150) / 5) * 2, game.getHeight() / 2, 2, ID.SLIDE, game, "mario/title screen", 60, 150, true);
+            shyGuy = new TitleScreenChars(((game.getWidth() + 150) / 5) * 3, game.getHeight() / 2, 2, ID.SLIDE, game, "shy guy/title screen", 60, 150, true);
+            fawful = new TitleScreenChars((((game.getWidth() + 150) / 5) * 4), game.getHeight() / 2, 2, ID.SLIDE, game, "fawful/title screen", 60, 150, true);
+            shroob = new TitleScreenChars(0, game.getHeight() / 2, 2, ID.SLIDE, game, "shroob/title screen", 60, 150, true);
+            toadette = new TitleScreenChars((((game.getWidth() + 150) / 5) * 5), game.getHeight() / 2, 2, ID.SLIDE, game, "toadette/title screen", 60, 150, true);
+        }
 
         titleScreen = new Button(game.getWidth() / 2, 75, 0, ID.BUTTON, game,"Title Screen", false);
         playButton = new Button(game.getWidth() / 4, game.getHeight() - 125, 0, ID.BUTTON, game,"Play Game", true);

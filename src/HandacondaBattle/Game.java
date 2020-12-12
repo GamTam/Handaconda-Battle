@@ -7,6 +7,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
@@ -21,7 +22,7 @@ public class Game extends Canvas implements Runnable {
 
     public Handler handler;
     public Random random;
-    public Soundtrack soundtrack = new Soundtrack("snif city", "origami king boss", "stabby stabby souls", this);
+    public Soundtrack soundtrack = new Soundtrack("snif city", "stabby stabby souls", this);
 
     public SCENE scene;
     public SCENE prevScene;
@@ -58,6 +59,8 @@ public class Game extends Canvas implements Runnable {
     public boolean sChar1 = false;
     public boolean sChar2 = false;
 
+    public int unlockingChar;
+
     public SCENE getID() {
         return scene;
     }
@@ -71,7 +74,7 @@ public class Game extends Canvas implements Runnable {
         SceneTransition t = new SceneTransition(SCENE.MainMenu, this);
         t.setX(-60);
         handler.addObject(t);
-        soundtrack.play("title");
+        //soundtrack.play("title");
 
         try {
             loadStats();
@@ -137,7 +140,7 @@ public class Game extends Canvas implements Runnable {
         stop();
     }
 
-    private void tick() throws IOException, FontFormatException, LineUnavailableException, UnsupportedAudioFileException {
+    private void tick() throws IOException, FontFormatException, LineUnavailableException, UnsupportedAudioFileException, URISyntaxException, InterruptedException {
         playTime += 1;
         if (scene != prevScene) {
             prevScene = scene;
@@ -149,9 +152,12 @@ public class Game extends Canvas implements Runnable {
                 new CharSelect(this, handler, SCENE.CharSelect);
             } else if (scene == SCENE.Stats) {
                 new StatsScene(this, handler);
+            } else if (scene == SCENE.Unlock) {
+                new UnlockScene(this, handler, unlockingChar);
             } else if (scene == SCENE.Game) {
+                opponentChar = playerChar;
                 do {
-                    int num = random.nextInt(6);
+                    int num = random.nextInt(8);
 
                     if (num == 1) {
                         opponentChar = "Mario";
@@ -161,12 +167,18 @@ public class Game extends Canvas implements Runnable {
                         opponentChar = "Fawful";
                     } else if (num == 4) {
                         opponentChar = "Shy Guy";
-                    } else if (num == 5) {
+                    } else if (num == 5 && sChar2) {
                         opponentChar = "Sans";
-                    } else {
+                    } else if (num == 6) {
+                        opponentChar = "Shroob";
+                    } else if (num == 7 && sChar1) {
+                        opponentChar = "Kirby";
+                    } else if (num == 0) {
                         opponentChar = "Toadette";
                     }
                 } while (opponentChar.equalsIgnoreCase(playerChar));
+
+                System.out.println(opponentChar);
 
                 battle = new Battle(this, handler, SCENE.Game);
             }

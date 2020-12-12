@@ -8,7 +8,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-public class Battle extends Scene {
+public class Battle extends GameScene {
 
     BattleChars player;
     BattleChars enemy;
@@ -247,7 +247,15 @@ public class Battle extends Scene {
                 } else if (step == 7) {
                     if (player.hp <= 0 || enemy.hp <= 0) {
                         game.removeMouseListener(this);
-                        game.handler.addObject(new SceneTransition(SCENE.MainMenu, game));
+                        if (game.gamesWon >= 30 && !game.sChar1) {
+                            game.unlockingChar = 1;
+                            game.handler.addObject(new SceneTransition(SCENE.Unlock, game));
+                        } else if (game.gamesLost >= 5 && !game.sChar2 && game.playTime >= 432000) {
+                            game.unlockingChar = 2;
+                            game.handler.addObject(new SceneTransition(SCENE.Unlock, game));
+                        } else {
+                            game.handler.addObject(new SceneTransition(SCENE.MainMenu, game));
+                        }
                         step += 1;
                         timer = 60;
                     } else {

@@ -83,7 +83,8 @@ public class StatsText extends GameObject {
 
         y += increaseAmount;
         g.drawString("Games Played: " + game.games, x, y);
-        g.drawString("Play Time: " + displayTime, game.getWidth() / 2, y);
+        drawCenteredString(g, "Play Time", new Rectangle((int) (game.getWidth() * 0.75), y, 0, 0), font);
+        drawCenteredString(g, "" + displayTime, new Rectangle((int) (game.getWidth() * 0.75), y + increaseAmount, 0, 0), font);
         y += increaseAmount;
         g.drawString("Games Won: " + game.gamesWon, x, y);
         y += increaseAmount;
@@ -124,5 +125,13 @@ public class StatsText extends GameObject {
 
         x = tempX;
         y = tempY;
+    }
+
+    public void drawCenteredString(Graphics g, String text, Rectangle rect, Font font) {
+        FontMetrics metrics = g.getFontMetrics(font);
+        int x = rect.x + (rect.width - metrics.stringWidth(text)) / 2;
+        int y = rect.y;
+        g.setFont(font);
+        g.drawString(text, x, y);
     }
 }

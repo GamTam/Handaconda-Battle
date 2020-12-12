@@ -4,5 +4,6 @@ public enum SCENE {
     MainMenu,
     CharSelect,
     Game,
-    Stats
+    Stats,
+    Unlock
 }

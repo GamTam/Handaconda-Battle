@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 // The Character select screen
-public class CharSelect extends Scene {
+public class CharSelect extends GameScene {
     Button random;
     Button mario;
     Button luigi;
@@ -50,8 +50,17 @@ public class CharSelect extends Scene {
         shroob =   new Button(400, 330, 0, ID.BUTTON, this.game, "charselect/Shroob", true);
         shyGuy =   new Button(615, 330, 0, ID.BUTTON, this.game, "charselect/Shy Guy", true);
 
-        sans =     new Button(185, 198, 0, ID.BUTTON, this.game, "charselect/Sans", true);
-        kirby =    new Button(615, 198, 0, ID.BUTTON, this.game, "charselect/Kirby", true);
+        if (game.sChar2) {
+            sans = new Button(185, 198, 0, ID.BUTTON, this.game, "charselect/Sans", true);
+        } else {
+            sans = new Button(185, -500, 0, ID.BUTTON, this.game, "charselect/Sans", true);
+        }
+
+        if (game.sChar1) {
+            kirby = new Button(615, 198, 0, ID.BUTTON, this.game, "charselect/Kirby", true);
+        } else {
+            kirby = new Button(185, -500, 0, ID.BUTTON, this.game, "charselect/Kirby", true);
+        }
 
         back =     new Button(127, 565, 0, ID.BUTTON, this.game, "charselect/Back", true);
 
@@ -98,7 +107,9 @@ public class CharSelect extends Scene {
                 playerChar = shyGuy;
             } else if (kirby.mouseOver(x, y)) {
                 playerChar = kirby;
-            }else if (random.mouseOver(x, y)) {
+            } else if (shroob.mouseOver(x, y)) {
+                playerChar = shroob;
+            } else if (random.mouseOver(x, y)) {
                 playerChar = random;
             } else if (easy.mouseOver(x, y)) {
                 difficulty = easy;
@@ -111,26 +122,43 @@ public class CharSelect extends Scene {
                     game.difficulty = difficulty.name;
 
                     if (playerChar.name.equalsIgnoreCase("random")) {
-                        int num = game.random.nextInt(6);
+                        boolean chosen = false;
+                        while (!chosen) {
+                            int num = game.random.nextInt(8);
 
-                        if (num == 1) {
-                            game.playerChar = "Mario";
-                            game.marioTimes += 1;
-                        } else if (num == 2) {
-                            game.playerChar = "Luigi";
-                            game.luigiTimes += 1;
-                        } else if (num == 3) {
-                            game.playerChar = "Fawful";
-                            game.fawfulTimes += 1;
-                        } else if (num == 4) {
-                            game.playerChar = "Shy Guy";
-                            game.shyGuyTimes += 1;
-                        } else if (num == 5) {
-                            game.playerChar = "Sans";
-                            game.sansTimes += 1;
-                        } else {
-                            game.playerChar = "Toadette";
-                            game.toadetteTimes += 1;
+                            if (num == 1) {
+                                game.playerChar = "Mario";
+                                game.marioTimes += 1;
+                                chosen = true;
+                            } else if (num == 2) {
+                                game.playerChar = "Luigi";
+                                game.luigiTimes += 1;
+                                chosen = true;
+                            } else if (num == 3) {
+                                game.playerChar = "Fawful";
+                                game.fawfulTimes += 1;
+                                chosen = true;
+                            } else if (num == 4) {
+                                game.playerChar = "Shy Guy";
+                                game.shyGuyTimes += 1;
+                                chosen = true;
+                            } else if (num == 5 && game.sChar2) {
+                                game.playerChar = "Sans";
+                                game.sansTimes += 1;
+                                chosen = true;
+                            } else if (num == 6 && game.sChar1) {
+                                game.playerChar = "Kirby";
+                                game.sansTimes += 1;
+                                chosen = true;
+                            } else if (num == 7) {
+                                game.playerChar = "Shroob";
+                                game.sansTimes += 1;
+                                chosen = true;
+                            } else if (num == 0) {
+                                game.playerChar = "Toadette";
+                                game.toadetteTimes += 1;
+                                chosen = true;
+                            }
                         }
                     } else {
                         game.playerChar = playerChar.name;
@@ -150,6 +178,8 @@ public class CharSelect extends Scene {
                         game.toadetteTimes += 1;
                     } else if (playerChar.name.equalsIgnoreCase("kirby")) {
                         game.kirbyTimes += 1;
+                    } else if (playerChar.name.equalsIgnoreCase("shroob")) {
+                        game.shroobTimes += 1;
                     }
 
                     if (difficulty.name.equalsIgnoreCase("easy")) {

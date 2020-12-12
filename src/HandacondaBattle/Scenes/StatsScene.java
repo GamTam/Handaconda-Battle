@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-public class StatsScene extends Scene {
+public class StatsScene extends GameScene {
     Button back;
 
     StatsText stats;
